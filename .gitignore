@@ -1,0 +1,52 @@
+# =========================
+# Terraform
+# =========================
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# =========================
+# SSH Keys
+# =========================
+*.pem
+id_rsa
+id_rsa.pub
+*.key
+
+# =========================
+# Ansible
+# =========================
+*.retry
+vault_pass.txt
+*.vault
+
+# =========================
+# Environment Files
+# =========================
+.env
+.env.*
+
+# =========================
+# Python Cache (Ansible uses Python)
+# =========================
+__pycache__/
+*.pyc
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
