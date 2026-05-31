@@ -1,0 +1,58 @@
+name: Terraform-Ansible
+
+on:
+ push:
+  branch: 
+   - main
+
+jobs:
+  deploy
+   runs-on: ubuntu-latest
+
+  steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: COnfigure AWS
+      uses: 
+       aws-actions/configure-aws-crendential@v4
+      with:
+       aws-access-key-id: $
+         {{ secrets.AWS_ACCESS_KEY_ID }}
+       aws-secret-access-key: $
+         {{ secrets.AWS_SECRET_ACCESS_KEY }}
+       aws-region: us-east-1
+
+    - name: Setup Terraform 
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan
+
+    - name: Terraform Apply
+      run: terraform apply --auto-approve
+
+    - name: Install Ansible
+      run: |
+       sudo apt update
+       sudo apt install ansible -y
+
+    - name: Update Inventory
+      working-inventory: .
+      run: |
+        echo "[web]" > ansible/inventory.ini
+        echo "${{ secrets.EC2_HOST }}" >> ansible/inventory.ini 
+        echo "" >> ansible/inventory.ini
+        echo "[web:vars]" >> ansible/inventory.ini
+        echo "ansible_user=ubuntu" >> ansible/inventory.ini
+
+    - name: Run Ansible Playbook
+      working-directory: .
+      run: |
+        ansible-playbook -i ansible/inventory.ini ansible/playbook.yml                         

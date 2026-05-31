@@ -21,9 +21,9 @@ resource "aws_instance" "web" {
   }
 }
 
-data  "aws_eip" "existing_eip" {
+data "aws_eip" "existing_eip" {
   public_ip = "44.210.40.108"
-  
+
 }
 resource "aws_eip_association" "eip_assoc" {
   instance_id   = aws_instance.web.id
