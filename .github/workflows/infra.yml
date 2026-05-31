@@ -69,6 +69,12 @@ jobs:
          echo "" >> ansible/inventory.ini
          echo "[web:vars]" >> ansible/inventory.ini
          echo "ansible_user=ubuntu" >> ansible/inventory.ini
+
+     - name: Create SSH Private Key
+       run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa 
     
      - name: Run Ansible Playbook
        working-directory: .
