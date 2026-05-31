@@ -20,19 +20,23 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-     - name: Setup Terraform 
+     - name: Setup Terraform  
        uses: hashicorp/setup-terraform@v3
 
      - name: Terraform Init
+       working-directory: terraform
        run: terraform init
 
      - name: Terraform Validate
+       working-directory: terraform
        run: terraform validate
 
      - name: Terraform Plan
+       working-directory: terraform
        run: terraform plan
 
      - name: Terraform Apply
+       working-directory: terraform
        run: terraform apply --auto-approve
 
      - name: Install Ansible
