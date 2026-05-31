@@ -20,13 +20,21 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-     - name: Setup Terraform  
-       uses: hashicorp/setup-terraform@v3
-
      - name: Create Public Key File
        working-directory: terraform
        run: |
-         echo "${{ secrets.PUBLIC_KEY }}" > public_key.pub   
+          echo "${{ secrets.PUBLIC_KEY }}" > public_key.pub
+
+     - name: Create terraform.tfvars
+       working-directory: terraform
+       run: |
+         echo 'key_name"${{ secrets.KEY_NAME }}"' > terraform.tfvars 
+         echo 'public_key_path="public_key_pub"' >> terraform.tfvars
+             
+
+     - name: Setup Terraform  
+       uses: hashicorp/setup-terraform@v3
+   
 
      - name: Terraform Init
        working-directory: terraform
