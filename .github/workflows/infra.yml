@@ -33,11 +33,11 @@ jobs:
 
      - name: Terraform Plan
        working-directory: terraform
-       run: terraform plan
+       run: terraform plan -var-file="terraform.tfvars"  
 
      - name: Terraform Apply
        working-directory: terraform
-       run: terraform apply --auto-approve
+       run: terraform apply --auto-approve -var-file="terraform.tfvars"  
 
      - name: Install Ansible
        run: |
