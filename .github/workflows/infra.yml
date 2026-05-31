@@ -23,6 +23,11 @@ jobs:
      - name: Setup Terraform  
        uses: hashicorp/setup-terraform@v3
 
+     - name: Create Public Key File
+       working-directory: terraform
+       run: |
+         echo "${{ secrets.PUBLIC_KEY }}" > public_key.pub   
+
      - name: Terraform Init
        working-directory: terraform
        run: terraform init
