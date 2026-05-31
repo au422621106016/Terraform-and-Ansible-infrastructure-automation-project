@@ -29,7 +29,11 @@ jobs:
        working-directory: terraform
        run: |
          echo 'key_name"${{ secrets.KEY_NAME }}"' > terraform.tfvars 
-         echo 'public_key_path="public_key_pub"' >> terraform.tfvars
+         echo 'public_key_path = "public_key_pub"' >> terraform.tfvars
+
+     - name: Show tfvars
+       working-directory: terraform 
+       run: cat terraform.tfvars    
              
 
      - name: Setup Terraform  
