@@ -32,6 +32,7 @@ vault_pass.txt
 # =========================
 .env
 .env.*
+terraform/public_key.pub
 
 # =========================
 # Python Cache (Ansible uses Python)
